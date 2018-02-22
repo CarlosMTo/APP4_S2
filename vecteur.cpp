@@ -13,15 +13,8 @@ Vecteur <T>:: Vecteur()
 	length = 1;
 	t = new T [length];
 	i = 0;
+	currentPos = 0;
 }
-
-/*template <typename T>
-Vecteur <T>:: Vecteur(int a)
-{
-	t = new T*[a];
-	int length = a;
-	int i = 0;
-}*/
 
 template <typename T>
 Vecteur <T>:: ~Vecteur(){
@@ -29,25 +22,30 @@ Vecteur <T>:: ~Vecteur(){
 }
 
 template <typename T>
-bool Vecteur <T>:: add_donne(T donne)
-{
+void Vecteur<T>::operator += (const T donne) {
+
 	if ((i + 1) == length)
 	{
-		int j = 0;
-		T *f = t;
-		t = new T [2*length];
-		for (j = 0; j < length; j++)
-		{
-			t[j] = f[j];
-		}
-		length *= 2;
-		delete [] f;
+		double_size();
 	}
 
 	t[i] = donne;
 	i++;
+	currentPos = i;
+}
 
-	return true;
+template <typename T>
+void Vecteur <T>::double_size()
+{
+	int j;
+	T *f = t;
+	length *= 2;
+	t = new T[2 * length];
+	for (j = 0; j < i; j++)
+	{
+		t[j] = f[j];
+	}
+	delete[] f;
 }
 
 template <typename T>
@@ -77,18 +75,52 @@ template <typename T>
 void Vecteur <T>:: empty()
 {
 	i = 0;
+	currentPos = 0;
+}
+
+/*template <typename T>
+T& Vecteur <T>::operator++()
+{
+	if(currentPos < i)
+		++currentPos;
+	return *this;
 }
 
 template <typename T>
-T Vecteur <T>:: gets_donne(int index)
+T& Vecteur <T>::operator--()
 {
-	if (t[index] != 0)
-	{
-		return t[index];
-	}
-	else
-		return 0;
+	if (currentPos > 1)
+		--currentPos;
+	return *this;
 }
+
+template <typename T>
+T Vecteur <T>::get_current()
+{
+	return t[currentPos - 1];
+}*/
+
+template <typename T>
+int Vecteur <T>::get_pos()
+{
+	return currentPos;
+}
+
+/*template <typename T>
+const T Vecteur <T> ::operator[](const int index) {
+	return t[index-1];
+}*/
+
+template <typename T>
+const T& Vecteur <T> ::operator[](const int index) {
+	return t[index - 1];
+}
+
+
+/*template <typename T>
+const int& Vecteur <T> ::operator[](const int index, const T donne) {
+	t[index] = donne;
+}*/
 
 template <typename T>
 T Vecteur <T>:: rm_donne(int index)

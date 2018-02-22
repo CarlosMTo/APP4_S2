@@ -167,10 +167,11 @@ void MonInterface::testSuivant()
 
 	if (isrecording) {
 		n_archive++;
-		n_test++;
-		archive.add_donne(donnee);
+		n_test = n_archive;
+		archive += donnee;
+		
 		setArchive(donnee);
-		setArchive(n_test, n_archive);
+		setArchive(n_archive, n_archive);
 	}
 
 	setTest(donnee);
@@ -350,19 +351,29 @@ void MonInterface::modePile() {
 }
 
 void MonInterface::premier() {
-
+	setArchive(1, n_archive);
+	//setArchive(archive.gets_donne(1));
+	setArchive(archive[1]);
+	n_test = 1;
 }
 
 void MonInterface::dernier() {
-
+	setArchive(n_archive, n_archive);
+	//setArchive(archive.gets_donne(n_archive));
+	setArchive(archive[n_archive]);
+	n_test = n_archive;
 }
 
 void MonInterface::precedent() {
-
+	/*--archive;
+	setArchive(archive.get_pos(), n_archive);
+	setArchive(archive.get_current());*/
 }
 
 void MonInterface::suivant() {
-
+	/*++archive;
+	setArchive(archive.get_pos(), n_archive);
+	setArchive(archive.get_current());*/
 }
 
 /*void MonInterface::sauvegarder(char *nomFichier) {
