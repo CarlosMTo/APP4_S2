@@ -32,16 +32,16 @@ class Vecteur
 	void empty();
 	T rm_donne(int index);
 
-	//T& operator ++ ();
-	//T& operator -- ();
+	Vecteur <T>& operator ++ ();
+	Vecteur <T>& operator -- ();
 
 	int get_pos();
-
+	void setpos(int pos);
 	//const T operator [] (const int index);			  // set donnee en overload
 
 	const T& operator [] (const int index);           // gets donnee en overload
 
-	//T get_current();
+	T get_current();
 	//void afficher(ostream & s);
 
 	private:

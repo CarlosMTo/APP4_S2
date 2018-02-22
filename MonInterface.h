@@ -41,7 +41,9 @@ private:
 	enum Registre { SW = 8, BTN = 9, LD = 10, AN0 = 11, AN1 = 12, AN2 = 13, AN3 = 14 };
 	DonneesTest donnee;
 	CommunicationFPGA fpga;
-	int n_archive, n_test;
+	int n_archive;
+	//int n_test;
+
 	bool isrecording;
 	bool isfile;
 

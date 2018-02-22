@@ -26,7 +26,7 @@ MonInterface::MonInterface(const char * theName) : VisiTest(theName)
 
 	donnee.typeTest = 1;
 	n_archive = 0;
-	n_test = 0;
+	//n_test = 0;
 
 	donnee.registreSW = 1;
 	donnee.retourSW = 1;
@@ -166,12 +166,13 @@ void MonInterface::testSuivant()
 	}
 
 	if (isrecording) {
-		n_archive++;
-		n_test = n_archive;
+
 		archive += donnee;
 		
 		setArchive(donnee);
+		n_archive++;
 		setArchive(n_archive, n_archive);
+		
 	}
 
 	setTest(donnee);
@@ -336,7 +337,6 @@ void MonInterface::arreter() {
 }
 
 void MonInterface::vider() {
-	n_test = 0;
 	n_archive = 0;
 	archive.empty();
 	resetArchive();
@@ -352,28 +352,26 @@ void MonInterface::modePile() {
 
 void MonInterface::premier() {
 	setArchive(1, n_archive);
-	//setArchive(archive.gets_donne(1));
-	setArchive(archive[1]);
-	n_test = 1;
+	setArchive(archive[0]);
+	archive.setpos(0);
 }
 
 void MonInterface::dernier() {
 	setArchive(n_archive, n_archive);
-	//setArchive(archive.gets_donne(n_archive));
-	setArchive(archive[n_archive]);
-	n_test = n_archive;
+	setArchive(archive[n_archive-1]);
+	archive.setpos(n_archive-1);
 }
 
 void MonInterface::precedent() {
-	/*--archive;
-	setArchive(archive.get_pos(), n_archive);
-	setArchive(archive.get_current());*/
+	--archive;
+	setArchive(archive.get_pos()+1, n_archive);
+	setArchive(archive[archive.get_pos()]);
 }
 
 void MonInterface::suivant() {
-	/*++archive;
-	setArchive(archive.get_pos(), n_archive);
-	setArchive(archive.get_current());*/
+	++archive;
+	setArchive(archive.get_pos() + 1, n_archive);
+	setArchive(archive[archive.get_pos()]);
 }
 
 /*void MonInterface::sauvegarder(char *nomFichier) {

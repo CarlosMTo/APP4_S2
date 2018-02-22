@@ -78,27 +78,33 @@ void Vecteur <T>:: empty()
 	currentPos = 0;
 }
 
-/*template <typename T>
-T& Vecteur <T>::operator++()
+template <typename T>
+void Vecteur <T>::setpos(int pos)
 {
-	if(currentPos < i)
-		++currentPos;
+	currentPos = pos;
+}
+
+template <typename T>
+Vecteur <T>& Vecteur <T>::operator++()
+{
+	if(currentPos+1 < i)
+		currentPos++;
 	return *this;
 }
 
 template <typename T>
-T& Vecteur <T>::operator--()
+Vecteur <T>& Vecteur <T>::operator--()
 {
-	if (currentPos > 1)
-		--currentPos;
+	if (currentPos > 0)
+		currentPos--;
 	return *this;
 }
 
 template <typename T>
 T Vecteur <T>::get_current()
 {
-	return t[currentPos - 1];
-}*/
+	return t[currentPos];
+}
 
 template <typename T>
 int Vecteur <T>::get_pos()
@@ -113,7 +119,7 @@ const T Vecteur <T> ::operator[](const int index) {
 
 template <typename T>
 const T& Vecteur <T> ::operator[](const int index) {
-	return t[index - 1];
+	return t[index];
 }
 
 
